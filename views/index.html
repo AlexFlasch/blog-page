@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flascher Net</title>
+
+    <link rel="stylesheet" href="material-design-lite/material.min.css">
+    <script src="material-design-lite/material.min.js"></script>
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/lib/material-icons.min.css">
+</head>
+<body>
+    <div id="app">
+
+    	<div class="mdl-layout mdl-js-layout">
+            <header class="mdl-layout__header mdl-layout__header--transparent mdl-layout__header--scroll">
+                <div class="mdl-layout__header-row">
+                    <!-- Title -->
+                    <span class="mdl-layout-title">
+                        <i class="mi mi-flash-on"></i>
+                        Flascher Net
+                    </span>
+                    <!-- Add space to align navigation links to the right -->
+                    <div class="mdl-layout-spacer"></div>
+                    <!-- Navigation -->
+                    <nav class="mdl-navigation">
+                        <a href="https://github.com/flascher/" class="mdl-navigation__link">
+                            <i class="fa fa-github"></i>
+                            Github
+                        </a>
+                        <a href="https://twitter.com/theflascher" class="mdl-navigation__link">
+                            <i class="fa fa-twitter"></i>
+                            Twitter
+                        </a>
+                        <a href="https://www.linkedin.com/in/alexander-flasch-762692ab" class="mdl-navigation__link">
+                            <i class="fa fa-linkedin-square"></i>
+                            Linkedin
+                        </a>
+                    </nav>
+                </div>
+            </header>
+
+            <main id="page-content" class="mdl-layout__content">
+                
+                <blog-post v-for="post in blogPosts" :data="post"></blog-post>
+
+            </main>
+        </div>
+      
+    </div>
+
+    <script src="js/lib/vue.js"></script>
+    <script src="js/lib/vue-mdl.js"></script>
+    <script src="js/lib/vue-resource.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+    <script src="https://cdn.jsdelivr.net/vuefire/1.0.0/vuefire.min.js"></script>
+    <script src="js/lib/vue-waterfall.min.js"></script>
+    <script src="js/app.js"></script>
+
+    <template id="blog-post">
+        <div class="mdl-card mdl-shadow--2dp">
+            <div class="mdl-card__title" v-bind:style="titleImage">
+                <h2 class="mdl-card__title-text">
+
+                    {{ data.title }} -- {{ data.postDate }}
+
+                </h2>
+            </div>
+            <div class="mdl-card__supporting-text">
+
+                {{ data.blogText }}
+
+            </div>
+            <div class="mdl-card__media">
+                <div class="flex-container">
+                    <img class="post-img" v-for="img in data.images" :src="img" alt="img">
+                </div>
+            </div>
+        </div>
+        <div class="post-spacer"></div>
+    </template>
+</body>
+</html>

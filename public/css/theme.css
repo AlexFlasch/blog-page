@@ -1,0 +1,53 @@
+body {
+	background-color: #ddd;
+}
+
+header {
+	height: 250px !important;
+	margin-bottom: 2.5vh !important;
+
+	background: url('http://placekitten.com/g/3840/2160');
+}
+
+.mdl-navigation__link > i.fa {
+	color: #fff;
+}
+
+.mdl-card {
+	margin-left: auto;
+	margin-right: auto;
+
+	width: 95vw;
+}
+
+.mdl-card__title {
+	color: #fff;
+	height: 175px;
+}
+
+.post-spacer {
+	margin-bottom: 5rem;
+}
+
+.flex-container {
+	width: 100%;
+
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.mdl-card__media {
+	background-color: #86E2D5;
+}
+
+.post-img {
+	width: 30%;
+	height: 30%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10px;
+
+	flex-basis: 10%;
+}
