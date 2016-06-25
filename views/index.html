@@ -14,6 +14,21 @@
 <body>
     <div id="app">
 
+        <mdl-dialog v-ref:lightbox-modal>
+            <img :src="store.images[store.currentImage]" class="lightbox-image" alt="">
+            <template slot="actions">
+                <mdl-button class="mdl-js-ripple-effect" @click="$refs.lightboxModal.close()">
+                    Close
+                </mdl-button>
+                <mdl-button class="mdl-js-ripple-effect" @click="this.store.currentImage++">
+                    Next
+                </mdl-button>
+                <mdl-button class="mdl-js-ripple-effect" @click="this.store.currentImage--">
+                    Previous
+                </mdl-button>
+            </template>
+        </mdl-dialog>
+
     	<div class="mdl-layout mdl-js-layout">
             <header class="mdl-layout__header mdl-layout__header--transparent mdl-layout__header--scroll">
                 <div class="mdl-layout__header-row">
@@ -43,12 +58,12 @@
             </header>
 
             <main id="page-content" class="mdl-layout__content">
-                
+
                 <blog-post v-for="post in blogPosts" :data="post"></blog-post>
 
             </main>
         </div>
-      
+
     </div>
 
     <script src="js/lib/vue.js"></script>
@@ -58,6 +73,20 @@
     <script src="https://cdn.jsdelivr.net/vuefire/1.0.0/vuefire.min.js"></script>
     <script src="js/lib/vue-waterfall.min.js"></script>
     <script src="js/app.js"></script>
+
+    <template id="lightbox-album">
+        <div class="album-fade" @click="openLightbox()" v-on="mouseover: showIcon()">
+            <i class="fa fa-search"></i>
+            <span class="album-size">
+                {{ data.length }} photos
+            </span>
+        </div>
+        <div class="album-container">
+            <div class="album-picture" v-for="image in data">
+                <img class="mdl-shadow--2dp" :src="image" alt="img">
+            </div>
+        </div>
+    </template>
 
     <template id="blog-post">
         <div class="mdl-card mdl-shadow--2dp">
@@ -72,11 +101,10 @@
 
                 {{ data.blogText }}
 
-            </div>
-            <div class="mdl-card__media">
-                <div class="flex-container">
-                    <img class="post-img" v-for="img in data.images" :src="img" alt="img">
+                <div class="lightbox-container">
+                    <lightbox-album :data="data.images"></lightbox-album>
                 </div>
+
             </div>
         </div>
         <div class="post-spacer"></div>

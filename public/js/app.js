@@ -1,45 +1,69 @@
-var blogPost = Vue.extend({
+var baseUrl = 'https://blog-dev-f2132.firebaseio.com/';
+
+var baseRef = new Firebase(baseUrl);
+var blogPostRef = baseRef.child('blogPosts');
+
+Vue.component('lightbox-album', {
+	template: '#lightbox-album',
+	data: function() {
+		return {
+			modalShown: false,
+			store: store
+		};
+	},
+	props: {
+		data: Array
+	},
+	methods: {
+		openLightbox: function() {
+			store.images = this.data;
+			store.currentImage = 0;
+			this.$root.$refs.lightboxModal.open();
+		}
+	},
+	computed: {
+
+	}
+});
+
+Vue.component('blog-post', {
 	template: '#blog-post',
     props: {
     	data: Object
     },
-    components: {
-    	'waterfall': Waterfall.waterfall,
-        'waterfall-slot': Waterfall.waterfallSlot,
-    },
     methods: {
-   		
+
     },
     computed: {
     	titleImage: function() {
     		return {
     			background: 'url(' + this.data.titleImg + ')'
-    		}
+    		};
     	}
     }
 });
 
-var baseUrl = 'https://blog-af387.firebaseio.com/';
+var store = {
+	images: [],
+	currentImage: 0
+};
 
-var baseRef = new Firebase(baseUrl);
-var blogPostRef = new Firebase('https://blog-af387.firebaseio.com/blogPosts');
-
-new Vue({
+var vm = new Vue({
     el: '#app',
     firebase: {
-    	
+
     },
-    components: {
-        'blog-post': blogPost
-    },
+	components: VueMdl.components,
+	directives: VueMdl.directives,
     data: {
-    	blogPosts: []
+    	blogPosts: [],
+		store: store
     },
     methods: {
-        
+
     },
     computed: {
-    	
+
     },
     ready: function() {
         var that = this;
